@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Rendragraha Verdiansyah</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"><script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+	<!-- loader -->
+	<div class="bg-loader">
+		<div class="loader"></div>	
+	</div>
+
+	<!-- heder -->
+	<div class="medsos">
+		<div class="container">
+			<ul>
+				<li><a href="https://instagram.com/rendragv1?utm_source=ig_profile_share&igshid=1wny10sufjw0j"><i class="fab fa-instagram"></i></a></li>
+				<li><a href="https://twitter.com/rendragv25?s=08"><i class="fab fa-twitter"></i></a></li>
+				<li><a href="https://www.facebook.com/rendragraha.verdiansyah"><i class="fab fa-facebook"></i></a></li>
+			</ul>
+		</div>
+	</div>
+	<header>
+		<div class="container">
+			<ul>
+				<li><a href="index.html">HOME</a></li>
+				<li><a href="about.html">ABOUT</a></li>
+				<li><a href="address.html">ADDRESS</a></li>
+				<li class="active"><a href="pembayaran.html">Pembayaran</a></li>
+			</ul>
+	    </div>
+	</header>
+
+	<!--label-->
+	<section class="label">
+		<div class="container">
+			<h1>Pembayaran</h1>
+		</div>
+	</section>
+	<!--label-->
+
+	<!-- form pembelian -->
+	<form name="form">
+		<h3 class="write"><center>Form Pembelian Tiket</center></h3>
+		<label>Nama</label>
+			<input type="text" name="input_nama" size=10>
+		<br>
+
+		<label>Ticket Wisata</label>
+			<select name="input_tujuan" onchange="munculhargatiket()">
+			<option value="Amerika">--Pilih--</option>
+			<option value="Masjid Agung Jawa Tengah">Masjid Agung Jawa Tengah</option>
+			<option value="Lawang Sewu Semarang">Lawang Sewu Semarang</option>
+			<option value="Kelenteng Sam Poo Kong">Kelenteng Sam Poo Kong</option>
+			<option value="Candi Gedong Songo">Candi Gedong Songo</option>
+		</select><br>
+
+		<label>Harga</label>
+			<input type="text" name="output_hargatujuan" size=10>
+		<br/>
+		<label>Minuman</label>
+			<select name="input_tipetiket" onchange="munculhargatipetiket()">
+			<option value="Amerika">--Pilih--</option>
+			<option value="Teh Botol">Teh Botol</option>
+			<option value="Fanta">Fanta</option>
+			<option value="Momogi">Coca Cola</option>
+			<option value="Pocari Sweat">Pocari Sweat</option>
+			<option value="Fruitea">Fruitea</option>
+			<option value="Mizon">Mizon</option>
+		</select><br>
+
+		<label>Biaya Tambahan</label>
+			<input type="text" name="output_tambahanbiaya" size=10>
+		<br/>
+		
+		<label>Member?</label>
+			<input type="checkbox" name="memberbukan" onchange="apakahmember()"/>
+		<label>Diskon</label>
+			<input type="text" name="output_diskon" size=10/>
+		<br/>
+
+		<label>Jumlah Tiket</label>
+			<input type="text" name="input_jumlahtiket" size=10>
+		<br/>
+			<input type="button" Onclick="totalharga()" value='Hitung'>
+			<input type="reset" value='Clear'>
+		<br/>
+		
+		<label>Total Harga</label>
+			<input type="text" name="output_totalharga" size=10>
+			<br/>
+				<input type="button" Onclick="payment()" value='Bayar'>
+	</form>
+	<!-- form pembelian -->
+
+	<script type='text/javascript'>
+		alert("Anda memasuki Form Pembelian Tiket.")
+
+		function munculhargatiket(){
+			var tujuan = (document.form.input_tujuan.value);
+		
+			if (tujuan == "Masjid Agung Jawa Tengah"){hargatiket = 7500;} 
+			else if(tujuan == "Lawang Sewu Semarang"){hargatiket = 15000;}
+			else if(tujuan == "Kelenteng Sam Poo Kong"){hargatiket = 35000;}
+			else if(tujuan == "Candi Gedong Songo"){hargatiket = 10000;}
+			document.form.output_hargatujuan.value=eval(hargatiket);
+	   }
+	   
+		function munculhargatipetiket(){
+			var tipetiket = (document.form.input_tipetiket.value);
+			if (tipetiket == "Fanta"){tambahanbiaya = 0.80;}
+			else if (tipetiket == "Coca Cola"){tambahanbiaya = 0.80;}
+			else if (tipetiket == "Teh Botol"){tambahanbiaya = 0.60;}
+			else if (tipetiket == "Pocari Sweat"){tambahanbiaya = 1.80;}
+			else if (tipetiket == "Fruitea"){tambahanbiaya = 1.0;}
+			else if (tipetiket == "Mizon"){tambahanbiaya = 2.00;}
+			document.form.output_tambahanbiaya.value=eval(tambahanbiaya)*eval(document.form.output_hargatujuan.value);
+	   }
+
+		function apakahmember(){
+			if (document.form.memberbukan.checked == true){diskon = 0.10;}
+			else{diskon=0;}
+			document.form.output_diskon.value=eval(diskon)*(eval(document.form.output_tambahanbiaya.value) + eval(document.form.output_hargatujuan.value));
+	   }
+
+		function totalharga(){
+			var jumlahtiket = (document.form.input_jumlahtiket.value);
+			document.form.output_totalharga.value=eval(jumlahtiket)*(eval(document.form.output_tambahanbiaya.value)+eval(document.form.output_hargatujuan.value))-eval(document.form.output_diskon.value)
+	   }
+	    function payment(){
+            var jumlahtiket = (document.form.input_jumlahtiket.value);
+            alert("Pembayaran anda sudah berhasil, Terima kasih :)")
+        }
+	</script>
+
+	<!-- footer -->
+	<footer class="footer2">
+		<div class="container">
+			<small>Copyright &copy; 2021 - Rendragraha.All Right Reserved.</small>
+		</div>
+	</footer>
+	<!-- footer -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".bg-loader").hide();
+		})
+	</script>
+
+</body>
+</html>			
